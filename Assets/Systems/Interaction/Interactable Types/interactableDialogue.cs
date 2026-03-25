@@ -2,35 +2,42 @@ using UnityEngine;
 
 public class interactableDialogue : MonoBehaviour, IInteractable
 {
-    [Header("Dialogue")]
-    [SerializeField] private string dialogue;
-
-    [SerializeField] private UIManager uiManager;
+   
     [SerializeField] private DialogueManager dialogueManager;
+    
+    
+    
+    [Header("Dialogue")]
+   
+    public string Name;
+    [TextArea(3, 10)] public string[] sentences;
+
+    //[SerializeField] private UIManager uiManager;
+     //[SerializeField] private string dialogue;
 
     private void Awake()
     {
         dialogueManager = ServiceHub.Instance.DialogueManager;
-       uiManager = ServiceHub.Instance.UIManager;
+        //uiManager = ServiceHub.Instance.UIManager;
 
-        if (uiManager == null) Debug.LogError("UIManager not found in ServiceHub. Please ensure it is properly set up.");
+        //if (uiManager == null) Debug.LogError("UIManager not found in ServiceHub. Please ensure it is properly set up.");
     }
 
 
     public void Interact()
     { 
 
-        if (dialogueManager.inDialogue= true)
-        {
-            dialogueManager.DisplayNextString();
+        //if (dialogueManager.inDialogue= true)
+        //{
+        //    dialogueManager.DisplayNextString();
 
-        }
+        //}
 
-        else
-        {
-            dialogueManager.StartDialogue(dialogueQueue);
+        //else
+        //{
+            dialogueManager.StartDialogue(sentences);
 
-        }
+        //}
 
     }
 }

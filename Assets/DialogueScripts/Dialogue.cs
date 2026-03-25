@@ -9,8 +9,7 @@ public class Dialogue
     public string Name;
     [TextArea(3, 10)]
 
-    public string[] dialogueQueue;
-
+    public string[] sentences;
 
 
 

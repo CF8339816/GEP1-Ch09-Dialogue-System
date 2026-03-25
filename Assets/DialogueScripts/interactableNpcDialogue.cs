@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class NPCDialogueTrigger : MonoBehaviour, IInteractable
+public class interactableNpcDialogue : MonoBehaviour, IInteractable
 {
 
     public Dialogue dialogue;

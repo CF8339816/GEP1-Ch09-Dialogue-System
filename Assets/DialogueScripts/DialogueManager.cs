@@ -1,52 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 
 public class DialogueManager : MonoBehaviour
 {
-    public Text nameText;
-    public Text dialogueText;
+    //public Text nameText;
+    //public Text dialogueText;
 
-    private UIManager uiManager;
-    private PlayerMovementController playerMovementController;
-    private PlayerInteractionController playerInteractionController;
-    bool isDialogue = true;
-   // bool playerMovement.moveEnabled = false;
-   // bool playerInteraction.moveEnabled = false;
+   [SerializeField] private UIManager uiManager;
+    [SerializeField] private PlayerMovementController playerMovementController;
+    [SerializeField] private PlayerInteractionController playerInteractionController;
 
-    private Queue<string> dialogueQueue;
-  void Start()
+
+   // bool isDialogue = true;
+   //// bool playerMovement.moveEnabled = false;
+   //// bool playerInteraction.moveEnabled = false;
+
+   private Queue<string> dialogueQueue;
+
+
+
+
+    private void Awake()
     {
-        dialogueQueue = new Queue<string>();
-        
+        uiManager = ServiceHub.Instance.UIManager;
+        playerMovement = ServiceHub.Instance.Player.GetComponent<PlayerMovementController>;
+        playerInteraction= ServiceHub.Instance.Player.GetComponent<PlayerInteractionController>;
+
+
     }
-    public void StartDialogue(Dialogue dialogue)
+
+
+     //playerMovement.moveEnabled = false;
+     //   playerInteraction.moveEnabled = false;
+     //   isDialogue = true;
+     //   Debug.Log("Starting conversation " );
+
+     //  // sentences.Clear();
+     //   dialogueQueue.Clear();
+
+
+
+    //void Start()
+    //  {
+    //      sentences = new Queue<string>();
+
+    //  }
+    public void StartDialogue(string[] sentences)
     {
-        Debug.Log("Starting conversation with " + dialogue.Name );
+       
 
-        nameText.text = dialogue.Name;
+       // nameText.text = dialogue.Name;
 
-        isDialogue = true;
-       // playerMovement.moveEnabled = false;
-       // playerInteraction.moveEnabled = false;
+        if (dialogueQue.count == 1) Debug.LogError("NOPERS");
 
-        dialogueQueue.Clear();
-
-        foreach(string sentence in dialogue.dialogueQueue)
+   
+        foreach (string currentstring in sentences)
         {
 
-            dialogueQueue.Enqueue(sentence);
+            dialogueQueue.Enqueue(currentstring);
 
         }
-        DisplayNextSentence();
+        DisplayNextString();
     }
 
-    public void DisplayNextSentence()
+    public void DisplayNextString()
     {
-        if (dialogueQueue.Count==0)
+        if (sentences.Count==0)
         {
             EndDialogue();
             return;
