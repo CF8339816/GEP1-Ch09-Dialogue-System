@@ -1,26 +1,44 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 public class DialogueManager : MonoBehaviour
 {
+    public Text nameText;
+    public Text dialogueText;
 
+    private UIManager uiManager;
+    private PlayerMovementController playerMovementController;
+    private PlayerInteractionController playerInteractionController;
+    bool isDialogue = true;
+   // bool playerMovement.moveEnabled = false;
+   // bool playerInteraction.moveEnabled = false;
 
-    private Queue<string> sentences;
+    private Queue<string> dialogueQueue;
   void Start()
     {
-        sentences = new Queue<string>();
+        dialogueQueue = new Queue<string>();
         
     }
     public void StartDialogue(Dialogue dialogue)
     {
-        sentences.Clear();
+        Debug.Log("Starting conversation with " + dialogue.Name );
 
-        foreach(string sentence in dialogue.sentences)
+        nameText.text = dialogue.Name;
+
+        isDialogue = true;
+       // playerMovement.moveEnabled = false;
+       // playerInteraction.moveEnabled = false;
+
+        dialogueQueue.Clear();
+
+        foreach(string sentence in dialogue.dialogueQueue)
         {
 
-            sentences.Enqueue(sentence);
+            dialogueQueue.Enqueue(sentence);
 
         }
         DisplayNextSentence();
@@ -28,18 +46,32 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count==0)
+        if (dialogueQueue.Count==0)
         {
             EndDialogue();
             return;
 
         }
-
-        string sentence = sentences.Dequeue();
+        else if(dialogueQueue.Count>0)
+        {
+            uiManager.setDialogueQueue = dialogueQueue.Dequeue();
+        }
+            string sentence = dialogueQueue.Dequeue();
+        dialogueText.text = sentence;
+        Debug.Log(sentence);
     }
 
    void EndDialogue()
     {
-        
+        Debug.Log("end of conversation.");
+
+
+        dialogueQueue.Clear();
+
+        uiManager.HideDialoguePanel();
+        isDialogue = false;
+       // playerMovement.moveEnabled = true;
+       // playerInteraction.moveEnabled = true;
+
     }
 }
