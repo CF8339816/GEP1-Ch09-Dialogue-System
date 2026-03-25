@@ -9,7 +9,7 @@ public class interactableDialogue : MonoBehaviour, IInteractable
     
     [Header("Dialogue")]
    
-    public string Name;
+   // public string Name;
     [TextArea(3, 10)] public string[] sentences;
 
     //[SerializeField] private UIManager uiManager;

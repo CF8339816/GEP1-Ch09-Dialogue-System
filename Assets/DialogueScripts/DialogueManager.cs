@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 //using Unity.VisualScripting;
 using UnityEngine;
 //using UnityEngine.UI;
@@ -27,13 +29,10 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         uiManager = ServiceHub.Instance.UIManager;
-        playerMovement = ServiceHub.Instance.Player.GetComponent<PlayerMovementController>;
-        playerInteraction= ServiceHub.Instance.Player.GetComponent<PlayerInteractionController>;
-
+        playerMovementController = ServiceHub.Instance.Player.GetComponent<PlayerMovementController>();
+        playerInteractionController = ServiceHub.Instance.Player.GetComponent<PlayerInteractionController>();
 
     }
-
-
      //playerMovement.moveEnabled = false;
      //   playerInteraction.moveEnabled = false;
      //   isDialogue = true;
@@ -41,21 +40,13 @@ public class DialogueManager : MonoBehaviour
 
      //  // sentences.Clear();
      //   dialogueQueue.Clear();
-
-
-
-    //void Start()
-    //  {
-    //      sentences = new Queue<string>();
-
-    //  }
     public void StartDialogue(string[] sentences)
     {
        
 
        // nameText.text = dialogue.Name;
 
-        if (dialogueQue.count == 1) Debug.LogError("NOPERS");
+        if (dialogueQueue.Count == 1) Debug.LogError("NOPERS");
 
    
         foreach (string currentstring in sentences)
@@ -69,7 +60,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextString()
     {
-        if (sentences.Count==0)
+        if (dialogueQueue.Count==0)
         {
             EndDialogue();
             return;
