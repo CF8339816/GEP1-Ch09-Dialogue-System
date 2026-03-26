@@ -1,3 +1,4 @@
+using Unity.Jobs;
 using UnityEngine;
 
 public class interactableDialogue : MonoBehaviour, IInteractable
@@ -27,13 +28,13 @@ public class interactableDialogue : MonoBehaviour, IInteractable
     public void Interact()
     {
 
-        if (dialogueManager.inDialogue = true)
+        if (dialogueManager.isDialogue == true)
         {
             dialogueManager.DisplayNextString();
 
         }
 
-        else
+        else //if (dialogueManager.isDialogue == false)
         {
             dialogueManager.StartDialogue(sentences);
 
