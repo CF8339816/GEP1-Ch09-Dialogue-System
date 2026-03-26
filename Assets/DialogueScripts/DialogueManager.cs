@@ -60,11 +60,11 @@ public class DialogueManager : MonoBehaviour
     {
        
         
-        if (uiManager.IsTypewriterActive())
-        {
-            uiManager.SkipTypewriter();
-            return;
-        }
+        //if (uiManager.IsTypewriterActive())
+        //{
+        //    uiManager.SkipTypewriter();
+        //    return;
+        //}
 
         if (dialogueQueue.Count == 0)
         {

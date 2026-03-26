@@ -122,40 +122,40 @@ public class UIManager : MonoBehaviour
         dialogueText.text = dialogueString;
     }
 
-    public bool IsTypewriterActive()
-    {
-        return isTypewriterActive;
-    }
+   // public bool IsTypewriterActive()
+   // {
+   //     return isTypewriterActive;
+   // }
        
-   public IEnumerator TypewriterEffect(string dialogueString)
-    {
-        dialogueText.text = "";
-        isTypewriterActive = true;
+   //public IEnumerator TypewriterEffect(string dialogueString)
+   // {
+   //     dialogueText.text = "";
+   //     isTypewriterActive = true;
 
-        foreach (char letter in dialogueString.ToCharArray())
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typewriterSpeed);
-        }
-        isTypewriterActive = false;   
+   //     foreach (char letter in dialogueString.ToCharArray())
+   //     {
+   //         dialogueText.text += letter;
+   //         yield return new WaitForSeconds(typewriterSpeed);
+   //     }
+   //     isTypewriterActive = false;   
 
-    }
+   // }
        
-    public void SkipTypewriter()
-    {
-        if (isTypewriterActive == true)
-        {
+   // public void SkipTypewriter()
+   // {
+   //     if (isTypewriterActive == true)
+   //     {
 
-            if (typewriterCoroutine != null)
-            {
+   //         if (typewriterCoroutine != null)
+   //         {
 
-                StopCoroutine(typewriterCoroutine);
-            }
-            dialogueText.text = currentDialogueString;
-            isTypewriterActive = false;
+   //             StopCoroutine(typewriterCoroutine);
+   //         }
+   //         dialogueText.text = currentDialogueString;
+   //         isTypewriterActive = false;
 
-        }
-    }
+   //     }
+   // }
 
 
 
