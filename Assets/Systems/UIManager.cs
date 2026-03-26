@@ -113,6 +113,10 @@ public class UIManager : MonoBehaviour
         dialoguePanel.SetActive(false);
     }
 
+    public void SetDialogueText(string dialogueString)
+    {
+        dialogueText.text = dialogueString;
+    }
 
     #endregion
 

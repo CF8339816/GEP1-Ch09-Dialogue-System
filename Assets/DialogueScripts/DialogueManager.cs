@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
+
 
 //using Unity.VisualScripting;
 using UnityEngine;
@@ -9,15 +11,13 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    //public Text nameText;
-    //public Text dialogueText;
-
+    
    [SerializeField] private UIManager uiManager;
     [SerializeField] private PlayerMovementController playerMovementController;
     [SerializeField] private PlayerInteractionController playerInteractionController;
 
 
-   // bool isDialogue = true;
+    public bool isDialogue = false;
    //// bool playerMovement.moveEnabled = false;
    //// bool playerInteraction.moveEnabled = false;
 
@@ -31,24 +31,27 @@ public class DialogueManager : MonoBehaviour
         uiManager = ServiceHub.Instance.UIManager;
         playerMovementController = ServiceHub.Instance.Player.GetComponent<PlayerMovementController>();
         playerInteractionController = ServiceHub.Instance.Player.GetComponent<PlayerInteractionController>();
-
+        dialogueQueue = new Queue<string>();
     }
-     //playerMovement.moveEnabled = false;
-     //   playerInteraction.moveEnabled = false;
-     //   isDialogue = true;
+   
      //   Debug.Log("Starting conversation " );
 
      //  // sentences.Clear();
      //   dialogueQueue.Clear();
     public void StartDialogue(string[] sentences)
-    {
-       
+    { 
+        
+        isDialogue = true;
+        playerMovementController.moveEnabled = false;
+        playerInteractionController.interactEnabled = false;
+        
 
-       // nameText.text = dialogue.Name;
+        uiManager.ShowDialoguePanel();
+        // nameText.text = dialogue.Name;
 
-        if (dialogueQueue.Count == 1) Debug.LogError("NOPERS");
+        //if (dialogueQueue.Count == 1) Debug.LogError("NOPERS");
 
-   
+
         foreach (string currentstring in sentences)
         {
 
@@ -60,32 +63,36 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextString()
     {
-        if (dialogueQueue.Count==0)
+        
+
+        if (dialogueQueue.Count == 0)
         {
             EndDialogue();
             return;
 
         }
-        else if(dialogueQueue.Count>0)
+        else if (dialogueQueue.Count > 0)
         {
-            uiManager.setDialogueQueue = dialogueQueue.Dequeue();
+            uiManager.SetDialogueText(dialogueQueue.Dequeue());
+
+            //uiManager.setDialogueQueue = dialogueQueue.Dequeue();
         }
-            string sentence = dialogueQueue.Dequeue();
+        string sentence = dialogueQueue.Dequeue();
         dialogueText.text = sentence;
-        Debug.Log(sentence);
+        //Debug.Log(sentence);
     }
 
    void EndDialogue()
     {
-        Debug.Log("end of conversation.");
+       // Debug.Log("end of conversation.");
 
 
         dialogueQueue.Clear();
-
         uiManager.HideDialoguePanel();
+      
         isDialogue = false;
-       // playerMovement.moveEnabled = true;
-       // playerInteraction.moveEnabled = true;
+        playerMovementController.moveEnabled = true;
+        playerInteractionController.moveEnabled = true;
 
     }
 }

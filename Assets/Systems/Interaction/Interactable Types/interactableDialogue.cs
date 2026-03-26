@@ -10,7 +10,7 @@ public class interactableDialogue : MonoBehaviour, IInteractable
     [Header("Dialogue")]
    
    // public string Name;
-    [TextArea(3, 10)] public string[] sentences;
+    [TextArea] public string[] sentences;
 
     //[SerializeField] private UIManager uiManager;
      //[SerializeField] private string dialogue;
@@ -25,19 +25,19 @@ public class interactableDialogue : MonoBehaviour, IInteractable
 
 
     public void Interact()
-    { 
+    {
 
-        //if (dialogueManager.inDialogue= true)
-        //{
-        //    dialogueManager.DisplayNextString();
+        if (dialogueManager.inDialogue = true)
+        {
+            dialogueManager.DisplayNextString();
 
-        //}
+        }
 
-        //else
-        //{
+        else
+        {
             dialogueManager.StartDialogue(sentences);
 
-        //}
+        }
 
-    }
+}
 }
