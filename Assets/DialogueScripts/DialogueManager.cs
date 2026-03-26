@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         
         isDialogue = true;
         playerMovement.moveEnabled = false;
-        //playerInteraction.interactEnabled = false;
+       // playerInteraction.ineract
         
 
         uiManager.ShowDialoguePanel();
@@ -58,7 +58,13 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextString()
     {
+       
         
+        if (uiManager.IsTypewriterActive())
+        {
+            uiManager.SkipTypewriter();
+            return;
+        }
 
         if (dialogueQueue.Count == 0)
         {
@@ -72,20 +78,20 @@ public class DialogueManager : MonoBehaviour
 
             
         }
-       
+        
     }
 
    void EndDialogue()
     {
        
-
+       // canAdvanceDialogue = false; 
 
         dialogueQueue.Clear();
         uiManager.HideDialoguePanel();
       
         isDialogue = false;
         playerMovement.moveEnabled = true;
-        //playerInteraction.moveEnabled = true;
+        //playerInteraction. interrrrrrrr = true;
 
     }
 }

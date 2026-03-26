@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,10 +24,12 @@ public class UIManager : MonoBehaviour
     // reference TMP IMage
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private bool usingTypewriterEffect = true;
 
-
-
-
+    private float typewriterSpeed=0.01f;
+    private string currentDialogueString = "" ;
+    private Coroutine typewriterCoroutine;
+    private bool isTypewriterActive = false;
 
     private void Awake()
     {
@@ -117,6 +121,44 @@ public class UIManager : MonoBehaviour
     {
         dialogueText.text = dialogueString;
     }
+
+    public bool IsTypewriterActive()
+    {
+        return isTypewriterActive;
+    }
+       
+   public IEnumerator TypewriterEffect(string dialogueString)
+    {
+        dialogueText.text = "";
+        isTypewriterActive = true;
+
+        foreach (char letter in dialogueString.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typewriterSpeed);
+        }
+        isTypewriterActive = false;   
+
+    }
+       
+    public void SkipTypewriter()
+    {
+        if (isTypewriterActive == true)
+        {
+
+            if (typewriterCoroutine != null)
+            {
+
+                StopCoroutine(typewriterCoroutine);
+            }
+            dialogueText.text = currentDialogueString;
+            isTypewriterActive = false;
+
+        }
+    }
+
+
+
 
     #endregion
 
