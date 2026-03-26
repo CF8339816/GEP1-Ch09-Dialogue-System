@@ -120,42 +120,57 @@ public class UIManager : MonoBehaviour
     public void SetDialogueText(string dialogueString)
     {
         dialogueText.text = dialogueString;
+
+        if (usingTypewriterEffect==true)
+        {
+            if (typewriterCoroutine != null)
+            {
+                StopCoroutine(typewriterCoroutine);
+            }
+            typewriterCoroutine = StartCoroutine(TypewriterEffect(dialogueString));
+
+        }
+        else
+        {
+            dialogueText.text = dialogueString;
+        }
+
     }
 
-   // public bool IsTypewriterActive()
-   // {
-   //     return isTypewriterActive;
-   // }
-       
-   //public IEnumerator TypewriterEffect(string dialogueString)
-   // {
-   //     dialogueText.text = "";
-   //     isTypewriterActive = true;
+    public bool IsTypewriterActive()
+    {
+        return isTypewriterActive;
+    }
 
-   //     foreach (char letter in dialogueString.ToCharArray())
-   //     {
-   //         dialogueText.text += letter;
-   //         yield return new WaitForSeconds(typewriterSpeed);
-   //     }
-   //     isTypewriterActive = false;   
+    public IEnumerator TypewriterEffect(string dialogueString)
+    {
+        dialogueText.text = "";
+        isTypewriterActive = true;
 
-   // }
-       
-   // public void SkipTypewriter()
-   // {
-   //     if (isTypewriterActive == true)
-   //     {
+        foreach (char letter in dialogueString.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typewriterSpeed);
+        }
+        isTypewriterActive = false;
 
-   //         if (typewriterCoroutine != null)
-   //         {
+    }
 
-   //             StopCoroutine(typewriterCoroutine);
-   //         }
-   //         dialogueText.text = currentDialogueString;
-   //         isTypewriterActive = false;
+    public void SkipTypewriter()
+    {
+        if (isTypewriterActive == true)
+        {
 
-   //     }
-   // }
+            if (typewriterCoroutine != null)
+            {
+
+                StopCoroutine(typewriterCoroutine);
+            }
+            dialogueText.text = currentDialogueString;
+            isTypewriterActive = false;
+
+        }
+    }
 
 
 

@@ -58,26 +58,25 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextString()
     {
-       
-        
-        //if (uiManager.IsTypewriterActive())
-        //{
-        //    uiManager.SkipTypewriter();
-        //    return;
-        //}
+
+
+        if (uiManager.IsTypewriterActive())
+        {
+            uiManager.SkipTypewriter();
+            return;
+        }
 
         if (dialogueQueue.Count == 0)
         {
             EndDialogue();
             return;
-
         }
         else if (dialogueQueue.Count > 0)
         {
             uiManager.SetDialogueText(dialogueQueue.Dequeue());
-
-            
         }
+
+
         
     }
 
